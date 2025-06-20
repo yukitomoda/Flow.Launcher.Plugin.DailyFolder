@@ -1,0 +1,12 @@
+{
+    "ID": "B4A91730C08342818D31D57EC31CBFD8",
+    "ActionKeyword": "tmp",
+    "Name": "DailyFolder",
+    "Description": "Create and open daily folder.",
+    "Author": "Yuki Tomoda",
+    "Version": "1.0.0",
+    "Language": "csharp",
+    "Website": "https://github.com/Yuki Tomoda/Flow.Launcher.Plugin.DailyFolder",
+    "IcoPath": "icon.png",
+    "ExecuteFileName": "Flow.Launcher.Plugin.DailyFolder.dll"
+}

@@ -1,0 +1,2 @@
+dotnet publish Flow.Launcher.Plugin.DailyFolder -c Release -r win-x64 --no-self-contained
+Compress-Archive -LiteralPath Flow.Launcher.Plugin.DailyFolder/bin/Release/win-x64/publish -DestinationPath Flow.Launcher.Plugin.DailyFolder/bin/DailyFolder.zip -Force

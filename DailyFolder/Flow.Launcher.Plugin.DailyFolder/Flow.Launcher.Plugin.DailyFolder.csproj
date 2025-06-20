@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <AssemblyName>Flow.Launcher.Plugin.DailyFolder</AssemblyName>
+    <PackageId>Flow.Launcher.Plugin.DailyFolder</PackageId>
+    <Authors>Yuki Tomoda</Authors>
+    <PackageProjectUrl>https://github.com/Yuki Tomoda/Flow.Launcher.Plugin.DailyFolder</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Yuki Tomoda/Flow.Launcher.Plugin.DailyFolder</RepositoryUrl>
+    <PackageTags>flow-launcher flow-plugin</PackageTags>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="plugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Flow.Launcher.Plugin" Version="4.4.0" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Debug (&#xA;  xcopy &quot;$(TargetDir)*&quot; &quot;%25APPDATA%25\FlowLauncher\Plugins\$(ProjectName)\&quot; /Y /I /S /E&#xA;)" />
+  </Target>
+
+</Project>
