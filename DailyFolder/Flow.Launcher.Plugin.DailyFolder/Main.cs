@@ -34,7 +34,7 @@ namespace Flow.Launcher.Plugin.DailyFolder
                         SubTitle = $"Open the daily folder for {now:yyyy-MM-dd}. Create if it does not exist.",
                         Action = _ =>
                         {
-                            var path = EnsureDailyFolderAsync(now);
+                            var path = EnsureDailyFoldeExists(now);
                             _context.API.OpenDirectory(path);
                             return true;
                         },
@@ -46,17 +46,17 @@ namespace Flow.Launcher.Plugin.DailyFolder
         /// Create a base folder if not exists. Do nothing if it already exists.
         /// </summary>
         /// <returns>The folder path to be created.</returns>
-        private string EnsureBaseFolderAsync()
+        private string EnsureBaseFolderExists()
         {
             Settings settings = _context.API.LoadSettingJsonStorage<Settings>();
             Directory.CreateDirectory(settings.BasePath);
             return settings.BasePath;
         }
 
-        private string EnsureDailyFolderAsync(DateTime now)
+        private string EnsureDailyFoldeExists(DateTime now)
         {
             var folderName = GetDailyFolderName(now);
-            var basePath = EnsureBaseFolderAsync();
+            var basePath = EnsureBaseFolderExists();
             var path = Path.Combine(basePath, folderName);
             Directory.CreateDirectory(path);
             return path;
