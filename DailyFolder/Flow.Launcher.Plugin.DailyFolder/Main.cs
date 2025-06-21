@@ -1,14 +1,9 @@
-using Flow.Launcher.Plugin;
 using Flow.Launcher.Plugin.DailyFolder.Views;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Flow.Launcher.Plugin.DailyFolder
@@ -76,8 +71,8 @@ namespace Flow.Launcher.Plugin.DailyFolder
                 results.Add(new Result
                 {
                     Score = 1000,
-                    Title = $"Prune Daily Folders",
-                    SubTitle = $"Prune all but the {retentionCount} newest folders.",
+                    Title = $"Prune Old Daily Folders",
+                    SubTitle = $"Prune old daily folders, retaining the {retentionCount} newest ones.",
                     IcoPath = "assets/icon.png",
                     Action = _ =>
                     {
