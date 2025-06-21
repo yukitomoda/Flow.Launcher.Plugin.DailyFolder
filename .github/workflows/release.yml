@@ -1,0 +1,50 @@
+name: Release Flow Launcher Plugin
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ release ]
+    paths-ignore: 
+      - .github/workflows/*
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: get version
+      id: version
+      uses: notiz-dev/github-action-json-property@release
+      with: 
+        path: 'plugin.json'
+        prop_path: 'Version'
+
+    - run: echo ${{steps.version.outputs.prop}}
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Create Plugin Package
+      shell: pwsh
+      run: |
+        cd DailyFolder
+        ./release.ps1
+    
+    - name: Publish
+      uses: softprops/action-gh-release@v1
+      if: success()
+      with:
+        name: Flow.Launcher.Plugin.DailyFolder v${{ steps.version.outputs.prop }}
+        draft: false
+        prerelease: false
+        files: DailyFolder/Flow.Launcher.Plugin.DailyFolder/bin/DailyFolder.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

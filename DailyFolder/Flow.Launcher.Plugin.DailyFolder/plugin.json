@@ -4,7 +4,7 @@
     "Name": "DailyFolder",
     "Description": "Create and open daily folder.",
     "Author": "Yuki Tomoda",
-    "Version": "1.0.0",
+    "Version": "0.0.1",
     "Language": "csharp",
     "Website": "https://github.com/yukitomoda/Flow.Launcher.Plugin.DailyFolder",
     "IcoPath": "assets/icon.png",
