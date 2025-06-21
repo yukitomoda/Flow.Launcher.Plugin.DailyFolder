@@ -4,7 +4,21 @@ A plugin for Flow Launcher that allows you to quickly create, open and prune dai
 
 # Features
 
-## Create Daily Folder
+## Open Daily Folder
+
+```txt
+# open the folder for today
+tmp
+
+# open the folder for yesterday
+tmp 1
+
+# open the folder for 10 days ago
+tmp 10
+
+# open the base folder
+tmp base
+```
 
 `tmp` to create a new daily folder and open it.
 
@@ -15,6 +29,11 @@ If you specify a number after `tmp` (e.g. `tmp 10`), it will open the folder for
 If you specify `tmp base`, it will open the base folder.
 
 ## Prune Old Folders
+
+```txt
+# prune old daily folders
+tmp prune
+```
 
 `tmp prune` to prune old daily folders.
 
