@@ -6,7 +6,7 @@
     "Author": "Yuki Tomoda",
     "Version": "1.0.0",
     "Language": "csharp",
-    "Website": "https://github.com/Yuki Tomoda/Flow.Launcher.Plugin.DailyFolder",
+    "Website": "https://github.com/yukitomoda/Flow.Launcher.Plugin.DailyFolder",
     "IcoPath": "icon.png",
     "ExecuteFileName": "Flow.Launcher.Plugin.DailyFolder.dll"
 }
