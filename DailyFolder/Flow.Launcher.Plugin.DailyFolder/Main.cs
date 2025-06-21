@@ -52,6 +52,7 @@ namespace Flow.Launcher.Plugin.DailyFolder
                         Score = 1000 - i,
                         Title = $"Open Daily Folder @{entry.date:yyyy-MM-dd}",
                         SubTitle = $"Back {count + i} folders from the latest.",
+                        IcoPath = "assets/icon.png",
                         Action = _ =>
                         {
                             return TryOpenDirectory(entry.dir);
@@ -77,6 +78,7 @@ namespace Flow.Launcher.Plugin.DailyFolder
                     Score = 1000,
                     Title = $"Prune Daily Folders",
                     SubTitle = $"Prune all but the {retentionCount} newest folders.",
+                    IcoPath = "assets/icon.png",
                     Action = _ =>
                     {
                         int deletedCount = 0;
@@ -97,6 +99,7 @@ namespace Flow.Launcher.Plugin.DailyFolder
                 Score = 0,
                 Title = "Open Daily Folder",
                 SubTitle = $"Open the daily folder for today({now:yyyy-MM-dd}). Create if it does not exist.",
+                IcoPath = "assets/icon.png",
                 Action = _ =>
                 {
                     var path = EnsureDailyFoldeExists(now);
