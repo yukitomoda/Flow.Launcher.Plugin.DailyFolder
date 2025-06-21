@@ -88,7 +88,8 @@ namespace Flow.Launcher.Plugin.DailyFolder
                     IcoPath = "assets/icon.png",
                     Action = _ =>
                     {
-                        return TryOpenDirectory(_settings.BasePath);
+                        var path = EnsureBaseFolderExists();
+                        return TryOpenDirectory(path);
                     },
                 });
             }
