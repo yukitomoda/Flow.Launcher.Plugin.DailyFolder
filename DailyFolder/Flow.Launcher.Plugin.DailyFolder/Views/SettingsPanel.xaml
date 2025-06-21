@@ -33,6 +33,6 @@
         <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" 
                  Margin="{StaticResource SettingPanelItemMargin}" VerticalAlignment="Center">Retaining count during pruning</TextBlock>
         <TextBox Grid.Row="1" Grid.Column="1" TextWrapping="Wrap"
-                 Text="{Binding PruneDefaultRetentionCount}" Margin="{StaticResource SettingPanelItemMargin}" VerticalAlignment="Center"/>
+                 Text="{Binding PruneRetentionCount}" Margin="{StaticResource SettingPanelItemMargin}" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>
