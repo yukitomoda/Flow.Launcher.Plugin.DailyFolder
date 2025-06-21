@@ -18,4 +18,4 @@ If you specify `tmp base`, it will open the base folder.
 
 `tmp prune` to prune old daily folders.
 
-This will delete all daily folders older than 30th folder from the latest (this count is configurable).
+This will delete all daily folders older than 30 days ago (this count is configurable).
