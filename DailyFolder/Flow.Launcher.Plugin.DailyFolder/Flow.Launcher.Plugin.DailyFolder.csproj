@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0-windows</TargetFramework>
@@ -37,9 +37,5 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if $(ConfigurationName) == Debug (&#xA;  xcopy &quot;$(TargetDir)*&quot; &quot;%25APPDATA%25\FlowLauncher\Plugins\$(ProjectName)\&quot; /Y /I /S /E&#xA;)" />
-  </Target>
 
 </Project>
