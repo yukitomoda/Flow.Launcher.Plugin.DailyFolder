@@ -1,14 +1,67 @@
 ﻿using Microsoft.VisualBasic.FileIO;
+using System.ComponentModel;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace Flow.Launcher.Plugin.DailyFolder
 {
-    internal class Settings
+    /// <summary>
+    /// Settings for the DailyFolder plugin.
+    /// </summary>
+    public class Settings : INotifyPropertyChanged
     {
-        public string BasePath = Path.Combine(SpecialDirectories.MyDocuments, "DailyFolder");
+        /// <inheritdoc/>
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public int EntriesCount = 3;
+        private string _basePath = Path.Combine(SpecialDirectories.MyDocuments, "DailyFolder");
+        /// <summary>
+        /// The base path where daily folders are stored.
+        /// </summary>
+        public string BasePath
+        {
+            get => _basePath;
+            set
+            {
+                _basePath = value;
+                OnPropertyChanged(nameof(BasePath));
+            }
+        }
 
-        public int PruneDefaultRetentionCount = 10;
+        private int _entriesCount = 3;
+        /// <summary>
+        /// The number of entries to display in the plugin.
+        /// </summary>
+        public int EntriesCount
+        {
+            get => _entriesCount;
+            set
+            {
+                _entriesCount = value;
+                OnPropertyChanged(nameof(EntriesCount));
+            }
+        }
+
+        private int _pruneDefaultRetentionCount = 30;
+        /// <summary>
+        /// The default number of items to retain during pruning operations.
+        /// </summary>
+        public int PruneDefaultRetentionCount
+        {
+            get => _pruneDefaultRetentionCount;
+            set
+            {
+                _pruneDefaultRetentionCount = value;
+                OnPropertyChanged(nameof(PruneDefaultRetentionCount));
+            }
+        }
+
+        /// <summary>
+        /// Raises the PropertyChanged event for the specified property.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

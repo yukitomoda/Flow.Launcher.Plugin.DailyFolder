@@ -1,4 +1,5 @@
 using Flow.Launcher.Plugin;
+using Flow.Launcher.Plugin.DailyFolder.Views;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -8,13 +9,14 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Flow.Launcher.Plugin.DailyFolder
 {
     /// <summary>
     /// Create and open a daily folder based on the current date.
     /// </summary>
-    public class DailyFolder : IPlugin
+    public class DailyFolder : IPlugin, ISettingProvider
     {
         private PluginInitContext _context;
         private Settings _settings;
@@ -24,7 +26,12 @@ namespace Flow.Launcher.Plugin.DailyFolder
         {
             _context = context;
             _settings = context.API.LoadSettingJsonStorage<Settings>();
+            _settings.PropertyChanged += (sender, _) =>
+            {
+                context.API.SaveSettingJsonStorage<Settings>();
+            };
         }
+
 
         /// <inheritdoc/>
         public List<Result> Query(Query query)
@@ -172,6 +179,12 @@ namespace Flow.Launcher.Plugin.DailyFolder
         private static string GetDailyFolderName(DateTime now)
         {
             return $"{now:yyyy-MM-dd}";
+        }
+
+        /// <inheritdoc/>
+        public Control CreateSettingPanel()
+        {
+            return new SettingsPanel(_settings);
         }
     }
 }
