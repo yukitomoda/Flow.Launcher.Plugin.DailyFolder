@@ -27,17 +27,17 @@ namespace Flow.Launcher.Plugin.DailyFolder
             }
         }
 
-        private int _pruneDefaultRetentionCount = 30;
+        private int _pruneRetentionCount = 30;
         /// <summary>
         /// The default number of items to retain during pruning operations.
         /// </summary>
-        public int PruneDefaultRetentionCount
+        public int PruneRetentionCount
         {
-            get => _pruneDefaultRetentionCount;
+            get => _pruneRetentionCount;
             set
             {
-                _pruneDefaultRetentionCount = value;
-                OnPropertyChanged(nameof(PruneDefaultRetentionCount));
+                _pruneRetentionCount = value;
+                OnPropertyChanged(nameof(PruneRetentionCount));
             }
         }
 

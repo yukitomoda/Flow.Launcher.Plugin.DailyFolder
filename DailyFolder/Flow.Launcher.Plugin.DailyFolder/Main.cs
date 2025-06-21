@@ -56,15 +56,6 @@ namespace Flow.Launcher.Plugin.DailyFolder
             }
             else if (query.FirstSearch == "prune")
             {
-                int retentionCount;
-                if (int.TryParse(query.SecondSearch, out int retentionCountSpec) && 0 <= retentionCountSpec)
-                {
-                    retentionCount = retentionCountSpec;
-                }
-                else
-                {
-                    retentionCount = _settings.PruneDefaultRetentionCount;
-                }
 
                 var entriesToDelete = entries.Skip(retentionCount).ToList();
 
