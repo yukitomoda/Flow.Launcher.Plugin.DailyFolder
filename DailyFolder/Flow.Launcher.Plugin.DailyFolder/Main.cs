@@ -93,6 +93,20 @@ namespace Flow.Launcher.Plugin.DailyFolder
                 });
 
             }
+            else if (query.FirstSearch == "base")
+            {
+                results.Add(new Result()
+                {
+                    Score = 1000,
+                    Title = "Open Base Folder",
+                    SubTitle = $"Open the base folder of daily folders.",
+                    IcoPath = "assets/icon.png",
+                    Action = _ =>
+                    {
+                        return TryOpenDirectory(_settings.BasePath);
+                    },
+                });
+            }
 
             results.Add(new Result()
             {
