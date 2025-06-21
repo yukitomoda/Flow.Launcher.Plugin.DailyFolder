@@ -35,35 +35,34 @@ namespace Flow.Launcher.Plugin.DailyFolder
             var results = new List<Result>();
             DateTime now = DateTime.Now;
 
-            var entries = EnumerateDailyFolderPaths()
-                .OrderByDescending(entry => entry.date)
-                .ToList();
-
-            if (int.TryParse(query.Search, out int count) && 0 <= count && count < entries.Count)
+            if (int.TryParse(query.Search, out int count) && 0 <= count && count < 10000)
             {
-                var (dir, date) = entries.Skip(count).FirstOrDefault();
+                var date = now.AddDays(-count);
                 results.Add(new Result
                 {
                     Score = 1000,
-                    Title = $"Open Daily Folder @{date:yyyy-MM-dd}",
-                    SubTitle = $"Back {count} folders from the latest.",
+                    Title = $"Open Daily Folder of {count} days ago",
+                    SubTitle = $"Open the daily folder for {count} days ago({now:yyyy-MM-dd}). Create if it does not exist.",
                     IcoPath = "assets/icon.png",
                     Action = _ =>
                     {
-                        return TryOpenDirectory(dir);
+                        var path = EnsureDailyFoldeExists(now);
+                        return TryOpenDirectory(path);
                     },
                 });
             }
             else if (query.FirstSearch == "prune")
             {
 
-                var entriesToDelete = entries.Skip(retentionCount).ToList();
+                var entriesToDelete = EnumerateDailyFolderPaths()
+                    .OrderByDescending(entry => entry.date)
+                    .Skip(_settings.PruneRetentionCount).ToList();
 
                 results.Add(new Result
                 {
                     Score = 1000,
                     Title = $"Prune Old Daily Folders",
-                    SubTitle = $"Prune old daily folders, retaining the {retentionCount} newest ones.",
+                    SubTitle = $"Prune old daily folders, retaining the {_settings.PruneRetentionCount} newest ones.",
                     IcoPath = "assets/icon.png",
                     Action = _ =>
                     {
