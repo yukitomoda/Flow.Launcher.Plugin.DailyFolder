@@ -3,9 +3,8 @@ name: Release Flow Launcher Plugin
 on:
   workflow_dispatch:
   push:
-    branches: [ release ]
-    paths-ignore: 
-      - .github/workflows/*
+    tags:
+      - 'v*'
 
 jobs:
   build:
