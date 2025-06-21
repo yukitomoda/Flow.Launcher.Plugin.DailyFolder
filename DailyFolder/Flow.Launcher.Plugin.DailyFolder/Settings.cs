@@ -8,5 +8,7 @@ namespace Flow.Launcher.Plugin.DailyFolder
         public string BasePath = Path.Combine(SpecialDirectories.MyDocuments, "DailyFolder");
 
         public int EntriesCount = 3;
+
+        public int PruneDefaultRetentionCount = 10;
     }
 }

@@ -51,8 +51,42 @@ namespace Flow.Launcher.Plugin.DailyFolder
                         },
                     }));
             }
+            else if (query.FirstSearch == "prune")
+            {
+                int retentionCount;
+                if (int.TryParse(query.SecondSearch, out int retentionCountSpec) && 0 <= retentionCountSpec)
+                {
+                    retentionCount = retentionCountSpec;
+                }
+                else
+                {
+                    retentionCount = _settings.PruneDefaultRetentionCount;
+                }
 
-            results.Add(new Result() {
+                var entriesToDelete = entries.Skip(retentionCount).ToList();
+
+                results.Add(new Result
+                {
+                    Score = 1000,
+                    Title = $"Prune Daily Folders",
+                    SubTitle = $"Prune all but the {retentionCount} newest folders.",
+                    Action = _ =>
+                    {
+                        int deletedCount = 0;
+                        foreach (var (dir, date) in entriesToDelete)
+                        {
+                            if (DeleteFolderRecursive(dir)) deletedCount++;
+                        }
+
+                        _context.API.ShowMsg("Prune Daily Folder", $"{deletedCount} folders deleted.");
+                        return true;
+                    },
+                });
+
+            }
+
+            results.Add(new Result()
+            {
                 Score = 0,
                 Title = "Open Daily Folder",
                 SubTitle = $"Open the daily folder for today({now:yyyy-MM-dd}). Create if it does not exist.",
@@ -113,6 +147,26 @@ namespace Flow.Launcher.Plugin.DailyFolder
 
             _context.API.OpenDirectory(path);
             return true;
+        }
+
+        private bool DeleteFolderRecursive(string path)
+        {
+            try
+            {
+                Directory.Delete(path, true);
+                return true;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                // Ignore even if it does not exist
+                return false;
+            }
+            catch (Exception)
+            {
+                _context.API.ShowMsgError("Failed to Daily Folder",
+                    $"Failed to delete folder {path}.");
+                return false;
+            }
         }
 
         private static string GetDailyFolderName(DateTime now)
