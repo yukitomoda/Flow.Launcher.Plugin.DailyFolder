@@ -41,18 +41,18 @@ namespace Flow.Launcher.Plugin.DailyFolder
 
             if (int.TryParse(query.Search, out int count) && 0 <= count && count < entries.Count)
             {
-                results.AddRange(entries.Skip(count).Take(_settings.EntriesCount)
-                    .Select((entry, i) => new Result
+                var (dir, date) = entries.Skip(count).FirstOrDefault();
+                results.Add(new Result
+                {
+                    Score = 1000,
+                    Title = $"Open Daily Folder @{date:yyyy-MM-dd}",
+                    SubTitle = $"Back {count} folders from the latest.",
+                    IcoPath = "assets/icon.png",
+                    Action = _ =>
                     {
-                        Score = 1000 - i,
-                        Title = $"Open Daily Folder @{entry.date:yyyy-MM-dd}",
-                        SubTitle = $"Back {count + i} folders from the latest.",
-                        IcoPath = "assets/icon.png",
-                        Action = _ =>
-                        {
-                            return TryOpenDirectory(entry.dir);
-                        },
-                    }));
+                        return TryOpenDirectory(dir);
+                    },
+                });
             }
             else if (query.FirstSearch == "prune")
             {

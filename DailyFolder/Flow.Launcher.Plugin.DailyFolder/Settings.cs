@@ -27,20 +27,6 @@ namespace Flow.Launcher.Plugin.DailyFolder
             }
         }
 
-        private int _entriesCount = 3;
-        /// <summary>
-        /// The number of entries to display in the plugin.
-        /// </summary>
-        public int EntriesCount
-        {
-            get => _entriesCount;
-            set
-            {
-                _entriesCount = value;
-                OnPropertyChanged(nameof(EntriesCount));
-            }
-        }
-
         private int _pruneDefaultRetentionCount = 30;
         /// <summary>
         /// The default number of items to retain during pruning operations.
