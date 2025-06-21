@@ -7,6 +7,6 @@
     "Version": "1.0.0",
     "Language": "csharp",
     "Website": "https://github.com/yukitomoda/Flow.Launcher.Plugin.DailyFolder",
-    "IcoPath": "icon.png",
+    "IcoPath": "assets/icon.png",
     "ExecuteFileName": "Flow.Launcher.Plugin.DailyFolder.dll"
 }
