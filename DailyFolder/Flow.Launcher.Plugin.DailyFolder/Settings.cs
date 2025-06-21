@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualBasic.FileIO;
 using System.ComponentModel;
 using System.IO;
-using System.Text.Json.Serialization;
 
 namespace Flow.Launcher.Plugin.DailyFolder
 {
