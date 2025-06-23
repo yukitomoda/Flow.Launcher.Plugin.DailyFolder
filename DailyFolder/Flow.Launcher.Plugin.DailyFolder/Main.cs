@@ -42,7 +42,7 @@ namespace Flow.Launcher.Plugin.DailyFolder
                 {
                     Score = 1000,
                     Title = $"Open Daily Folder of {count} days ago",
-                    SubTitle = $"Open the daily folder for {count} days ago({now:yyyy-MM-dd}). Create if it does not exist.",
+                    SubTitle = $"Open the daily folder for {count} days ago({date:yyyy-MM-dd}). Create if it does not exist.",
                     IcoPath = "assets/icon.png",
                     Action = _ =>
                     {
