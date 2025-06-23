@@ -46,7 +46,7 @@ namespace Flow.Launcher.Plugin.DailyFolder
                     IcoPath = "assets/icon.png",
                     Action = _ =>
                     {
-                        var path = EnsureDailyFoldeExists(now);
+                        var path = EnsureDailyFoldeExists(date);
                         return TryOpenDirectory(path);
                     },
                 });
